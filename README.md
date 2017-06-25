@@ -5,7 +5,7 @@ A simple NativeScript + Angular 2 images carousel for iOS and Android
 
 iOs                        |  Android
 :-------------------------:|:-------------------------:
-![](https://github.com/alcoceba/ngCarouselDirective/blob/master/demo/ios.gif)|![](https://github.com/alcoceba/ngCarouselDirective/blob/master/demo/android.gif)
+![](https://github.com/alcoceba/ngCarouselDirective/blob/master/demo/ios.gif?raw=true)|![](https://github.com/alcoceba/ngCarouselDirective/blob/master/demo/android.gif?raw=true)
 
 ## Getting started
 
