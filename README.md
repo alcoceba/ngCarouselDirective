@@ -1,6 +1,11 @@
 # {N} + Angular 2 Carousel Slider
 A simple NativeScript + Angular 2 images carousel for iOS and Android
 
+## Demo
+
+![alt text](https://github.com/alcoceba/ngCarouselDirective/blob/master/demo/android.gif)
+![alt text](https://github.com/alcoceba/ngCarouselDirective/blob/master/demo/ios.gif)
+
 ## Getting started
 
 
