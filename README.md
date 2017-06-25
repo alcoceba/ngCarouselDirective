@@ -88,7 +88,7 @@ export class AppComponent {
 
 ## Supported attributes
 
-Currently supported attributes:
+Currently directive supported attributes:
 
 * **carousel** list of images as JSON or CarouselSlide class, accepted parameters (title?, url?, file?)
 * **carouselSpeed** _(optional)_ defines the interval (number in ms) to wait before the next slide is shown 
