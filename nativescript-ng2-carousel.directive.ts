@@ -412,6 +412,7 @@ export class CarouselDirective implements AfterViewInit {
                 ret.l = '2039';
                 ret.r = '203A';
                 break;
+            default:
             case CarouselArrowTypes.NORMAL:
                 ret.l = '276E';
                 ret.r = '276F';
@@ -421,7 +422,6 @@ export class CarouselDirective implements AfterViewInit {
                 ret.r = '2771';
                 break;
             case CarouselArrowTypes.NARROW:
-            default:
                 ret.l = '2329';
                 ret.r = '232A';
                 break;

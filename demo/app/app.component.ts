@@ -9,7 +9,6 @@ export class AppComponent {
     protected images: Array<any> = [];
 
     constructor() {
-        console.log('images');
         this.images = [
             {
                 title: 'Image 1',
