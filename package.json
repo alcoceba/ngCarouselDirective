@@ -3,12 +3,11 @@
   "version": "0.0.1",
   "description": "A simple NativeScript + Angular 2 images carousel for iOS and Android",
   "license": "MIT",
-  "readme": "NativeScript + Angular 2 Application",
   "main": "nativescript-ng2-carousel",
   "homepage": "https://github.com/alcoceba/nativescript-ng2-carousel#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alcoceba/nativescript-ng2-carousel"
+    "url": "git+https://github.com/alcoceba/nativescript-ng2-carousel.git"
   },
   "typings": "nativescript-ng2-carousel.ts",
   "keywords": [
@@ -21,11 +20,11 @@
     "ng2",
     "typescript"
   ],
-  "author": {
-    "name": "Manel Alcoceba",
-    "email": "manelalcoceba@gmail.com"
-  },
+  "author": "Manel Alcoceba <manelalcoceba@gmail.com>",
   "bugs": {
     "url": "https://github.com/alcoceba/nativescript-ng2-carousel/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
