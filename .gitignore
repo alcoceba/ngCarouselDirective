@@ -1,0 +1,10 @@
+.idea
+*.js
+*.js.map
+demo/**/*.js
+demo/**/*.js.map
+demo/hooks/
+demo/lib/
+demo/node_modules/
+demo/platforms/
+.DS_Store

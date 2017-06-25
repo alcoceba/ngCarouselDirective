@@ -1,0 +1,31 @@
+{
+  "name": "nativescript-ng2-carousel",
+  "version": "0.0.1",
+  "description": "A simple NativeScript + Angular 2 images carousel for iOS and Android",
+  "license": "MIT",
+  "readme": "NativeScript + Angular 2 Application",
+  "main": "nativescript-ng2-carousel",
+  "homepage": "https://github.com/alcoceba/nativescript-ng2-carousel#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alcoceba/nativescript-ng2-carousel"
+  },
+  "typings": "nativescript-ng2-carousel.ts",
+  "keywords": [
+    "angular",
+    "nativescript",
+    "carousel",
+    "images",
+    "slides",
+    "angular2",
+    "ng2",
+    "typescript"
+  ],
+  "author": {
+    "name": "Manel Alcoceba",
+    "email": "manelalcoceba@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/alcoceba/nativescript-ng2-carousel/issues"
+  }
+}

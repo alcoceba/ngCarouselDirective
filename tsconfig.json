@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "ES5",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "declaration": true
+    },
+    "files": [
+        "nativescript-ng2-carousel.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "platforms",
+        "**/*.aot.ts",
+        "src",
+        "node_modules",
+        "platforms"
+    ]
+}
+
