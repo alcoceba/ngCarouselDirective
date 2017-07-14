@@ -7,7 +7,7 @@
   "homepage": "https://github.com/alcoceba/nativescript-ng2-carousel#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alcoceba/nativescript-ng2-carousel.git"
+    "url": "git+https://github.com/alcoceba/ngCarouselDirective.git"
   },
   "typings": "nativescript-ng2-carousel.ts",
   "keywords": [
@@ -20,6 +20,18 @@
     "ng2",
     "typescript"
   ],
+  "nativescript": {
+    "platforms": {
+      "android": "3.0.0",
+      "ios": "3.0.0"
+    },
+    "plugin": {
+      "nan": "true",
+      "pan": "false",
+      "core3": "true",
+      "category": "Interface"
+    }
+  },
   "author": "Manel Alcoceba <manelalcoceba@gmail.com>",
   "bugs": {
     "url": "https://github.com/alcoceba/nativescript-ng2-carousel/issues"
