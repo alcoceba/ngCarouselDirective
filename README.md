@@ -1,6 +1,8 @@
 # {N} + Angular 2 Carousel Slider
 A simple NativeScript + Angular 2 images carousel for iOS and Android
 
+I would appreciate any feedback as well as bug report, suggestions or changes. Thank you in advance.
+
 ## Demo
 
 iOs                        |  Android
@@ -48,6 +50,27 @@ export class AppComponent {
     }
 }
 </pre>
+
+You can rather (or both) add images from your assets folder using `file` attribute instead of `url` attribute:
+<pre>
+@Component({
+    selector: "my-app",
+    templateUrl: "app.component.html"
+})
+export class AppComponent {
+
+    protected images: Array<any> = [];
+
+    constructor() {
+        this.images = [
+            { title: 'Image 1', url: 'https://unsplash.it/400/300/?image=867' },
+            { title: 'Image 2', file: '~/assets/mountain.jpeg' },
+            { title: 'Image 3', url: 'https://unsplash.it/400/300/?image=876' },
+        ];
+    }
+}
+</pre>
+
 
 3. CSS styling:
 
