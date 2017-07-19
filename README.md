@@ -51,7 +51,7 @@ export class AppComponent {
 }
 </pre>
 
-You can rather (or both) add images from your assets folder using `file` attribute instead of `url` attribute:
+You can also add images from your assets folder using `file` attribute instead of `url` attribute:
 <pre>
 @Component({
     selector: "my-app",
