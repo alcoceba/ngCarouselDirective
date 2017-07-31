@@ -119,3 +119,13 @@ Currently directive supported attributes:
 * **carouselArrows** _(optional)_ arrow type, accepted values _none_, _small_, _normal_, _bold_ or _narrow_ (default _normal_)
 * **carouselLabelOverlay** _(optional)_ silde title over image, accepted values _true_ or _false_ (default false)
 
+## Changelog
+
+**Version 0.0.4**
+
+* Updated to Nativescript >= 3.0.0 + Angular 4
+
+**Version 0.0.3**
+
+* Package.json fixes
+* Minor fixes
