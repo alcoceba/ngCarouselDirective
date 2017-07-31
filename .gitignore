@@ -8,3 +8,7 @@ demo/lib/
 demo/node_modules/
 demo/platforms/
 .DS_Store
+node_modules
+platforms
+hooks
+lib

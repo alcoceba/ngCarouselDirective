@@ -1,6 +1,6 @@
 {
   "name": "nativescript-ng2-carousel",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple NativeScript + Angular 2 images carousel for iOS and Android",
   "license": "MIT",
   "main": "nativescript-ng2-carousel",
@@ -16,14 +16,17 @@
     "carousel",
     "images",
     "slides",
+    "slide",
+    "angular",
     "angular2",
+    "ng",
     "ng2",
     "typescript"
   ],
   "nativescript": {
     "platforms": {
-      "android": "3.0.0",
-      "ios": "3.0.0"
+      "android": "3.1.0",
+      "ios": "3.1.0"
     },
     "plugin": {
       "nan": "true",

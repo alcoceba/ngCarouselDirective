@@ -99,10 +99,10 @@ export class CarouselDirective implements AfterViewInit {
      * Init carousel layout
      */
     private initContainer() {
-        this.container.horizontalAlignment = HorizontalAlignment.center;
-        this.container.addRow(new ItemSpec(1, GridUnitType.auto));
-        this.container.addColumn(new ItemSpec(1, GridUnitType.star));
-        this.container.addColumn(new ItemSpec(1, GridUnitType.star));
+        this.container.horizontalAlignment = "center";
+        this.container.addRow(new ItemSpec(1, "auto"));
+        this.container.addColumn(new ItemSpec(1, "star"));
+        this.container.addColumn(new ItemSpec(1, "star"));
     }
 
     /**
@@ -122,8 +122,8 @@ export class CarouselDirective implements AfterViewInit {
         this.carousel.forEach((slide: CarouselSlide, i: number) => {
 
             let gridLayout = new GridLayout();
-            gridLayout.addRow(new ItemSpec(1, GridUnitType.auto));
-            gridLayout.visibility = i == 0 ? Visibility.visible : Visibility.collapse;
+            gridLayout.addRow(new ItemSpec(1, "auto"));
+            gridLayout.visibility = i == 0 ? "visible" : "collapse";
 
             if (slide.url) {
                 let image: Image = CarouselDirective.generateImageSliderFromUrl(slide.url);
@@ -138,7 +138,7 @@ export class CarouselDirective implements AfterViewInit {
             if (slide.title) {
                 let title: Label = CarouselDirective.generateTitleSlider(slide.title);
                 if (this.carouselLabelOverlay) {
-                    gridLayout.addRow(new ItemSpec(1, GridUnitType.auto));
+                    gridLayout.addRow(new ItemSpec(1, "auto"));
                     GridLayout.setRow(title, 1);
                 }
                 gridLayout.addChild(title);
@@ -201,7 +201,7 @@ export class CarouselDirective implements AfterViewInit {
             // Left arrow layout
             let lStackLayout = new StackLayout();
             lStackLayout.addChild(lLabel);
-            lStackLayout.horizontalAlignment = HorizontalAlignment.left;
+            lStackLayout.horizontalAlignment = "left";
             lStackLayout.on(GestureTypes.tap, () => {
                 this.stopStartAutoplay();
                 this.swipe(CarouselDirections.DIRECTION_LEFT);
@@ -217,7 +217,7 @@ export class CarouselDirective implements AfterViewInit {
             // Left arrow layout
             let rStackLayout = new StackLayout();
             rStackLayout.addChild(rLabel);
-            rStackLayout.horizontalAlignment = HorizontalAlignment.right;
+            rStackLayout.horizontalAlignment = "right";
             rStackLayout.on(GestureTypes.tap, () => {
                 this.stopStartAutoplay();
                 this.swipe(CarouselDirections.DIRECTION_RIGHT);
@@ -287,7 +287,7 @@ export class CarouselDirective implements AfterViewInit {
 
             // Get element width + image visibility
             let elementWidth = this.elem.nativeElement.getActualSize().width;
-            view.visibility = [this.indexMoveCenter, this.indexMoveLeft, this.indexMoveRight].indexOf(i) > -1 ? 'visible' : 'collapsed';
+            view.visibility = [this.indexMoveCenter, this.indexMoveLeft, this.indexMoveRight].indexOf(i) > -1 ? "visible" : "collapse";
 
             // Perfrom animation
             this.checkCL(view, i, elementWidth);

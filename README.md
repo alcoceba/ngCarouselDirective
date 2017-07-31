@@ -1,5 +1,5 @@
-# {N} + Angular 2 Carousel Slider
-A simple NativeScript + Angular 2 images carousel for iOS and Android
+# {N} + Angular Carousel Slider
+A simple NativeScript + Angular images carousel for iOS and Android. For {N} version >= 3.0.0.
 
 I would appreciate any feedback as well as bug report, suggestions or changes. Thank you in advance.
 

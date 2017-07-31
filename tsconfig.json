@@ -1,12 +1,23 @@
 {
     "compilerOptions": {
-        "noImplicitAny": true,
         "module": "commonjs",
-        "target": "ES5",
-        "emitDecoratorMetadata": true,
+        "target": "es5",
         "experimentalDecorators": true,
-        "sourceMap": true,
-        "declaration": true
+        "emitDecoratorMetadata": true,
+        "noEmitHelpers": true,
+        "noEmitOnError": true,
+        "lib": [
+            "es6",
+            "dom",
+            "es2015.iterable"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "./node_modules/tns-core-modules/*",
+                "./node_modules/*"
+            ]
+        }
     },
     "files": [
         "nativescript-ng2-carousel.ts"
@@ -14,10 +25,6 @@
     "exclude": [
         "node_modules",
         "platforms",
-        "**/*.aot.ts",
-        "src",
-        "node_modules",
-        "platforms"
+        "**/*.aot.ts"
     ]
 }
-
