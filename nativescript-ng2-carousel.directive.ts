@@ -10,6 +10,7 @@ import {GestureTypes} from "ui/gestures";
 import {View} from "ui/core/view";
 import {Visibility} from "ui/enums";
 import {fromFile} from "image-source";
+import {fromResource} from "image-source";
 
 @Directive({selector: '[carousel]'})
 export class CarouselDirective implements AfterViewInit {
@@ -130,8 +131,13 @@ export class CarouselDirective implements AfterViewInit {
                 gridLayout.addChild(image);
             }
 
-            if (slide.file) {
+            if (slide.file && slide.file.indexOf('res://') !== 0) {
                 let image: Image = CarouselDirective.generateImageSliderFromFile(slide.file);
+                gridLayout.addChild(image);
+            }
+
+            if (slide.file && slide.file.indexOf('res://') === 0) {
+                let image: Image = CarouselDirective.generateImageSliderFromResource(slide.file);
                 gridLayout.addChild(image);
             }
 
@@ -143,7 +149,6 @@ export class CarouselDirective implements AfterViewInit {
                 }
                 gridLayout.addChild(title);
             }
-
             this.carouselSlides.addChild(gridLayout);
         });
     }
@@ -173,9 +178,22 @@ export class CarouselDirective implements AfterViewInit {
     }
 
     /**
+     * Load images from file
+     * @param path
+     * @returns {Image}
+     */
+    private static generateImageSliderFromResource(path: string): Image {
+        let image: Image = new Image();
+        let pathRaw: string = path.replace('res://', '');
+        image.imageSource = fromResource(pathRaw);
+        image.className = "slider-image";
+        return image;
+    }
+
+    /**
      * Generate title slider element
      * @param title
-     * @returns {any}
+     * @returns {Label}
      */
     private static generateTitleSlider(title: string): Label {
         let label = new Label();

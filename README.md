@@ -51,7 +51,7 @@ export class AppComponent {
 }
 </pre>
 
-You can also add images from your assets folder using `file` attribute instead of `url` attribute:
+You can also add images from your assets folder or resources folder using `file` attribute instead of `url` attribute:
 <pre>
 @Component({
     selector: "my-app",
@@ -64,7 +64,8 @@ export class AppComponent {
     constructor() {
         this.images = [
             { title: 'Image 1', url: 'https://unsplash.it/400/300/?image=867' },
-            { title: 'Image 2', file: '~/assets/mountain.jpeg' },
+            { title: 'Image 2', file: '~/assets/sea-sunset.jpg' },
+            { title: 'Image 2', file: 'res://mountain' }, // Resource whitout extension
             { title: 'Image 3', url: 'https://unsplash.it/400/300/?image=876' },
         ];
     }
@@ -120,6 +121,10 @@ Currently directive supported attributes:
 * **carouselLabelOverlay** _(optional)_ silde title over image, accepted values _true_ or _false_ (default false)
 
 ## Changelog
+
+**Version 0.0.5**
+
+* Possiblity to load images from resources folder in Andorid and iOS
 
 **Version 0.0.4**
 
