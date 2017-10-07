@@ -65,7 +65,7 @@ export class AppComponent {
         this.images = [
             { title: 'Image 1', url: 'https://unsplash.it/400/300/?image=867' },
             { title: 'Image 2', file: '~/assets/sea-sunset.jpg' },
-            { title: 'Image 2', file: 'res://mountain' }, // Resource whitout extension
+            { title: 'Image 2', file: 'res://mountain' }, // Resource without extension
             { title: 'Image 3', url: 'https://unsplash.it/400/300/?image=876' },
         ];
     }
@@ -124,7 +124,7 @@ Currently directive supported attributes:
 
 **Version 0.0.5**
 
-* Possiblity to load images from resources folder in Andorid and iOS
+* Possibility to load images from resources folder in Android and iOS
 
 **Version 0.0.4**
 
