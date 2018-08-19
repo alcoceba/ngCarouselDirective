@@ -1,7 +1,7 @@
 {
   "name": "nativescript-ng2-carousel",
   "version": "0.0.5",
-  "description": "A simple NativeScript + Angular 2 images carousel for iOS and Android",
+  "description": "A simple NativeScript + Angular images carousel for iOS and Android",
   "license": "MIT",
   "main": "nativescript-ng2-carousel",
   "homepage": "https://github.com/alcoceba/ngCarouselDirective#readme",
@@ -17,11 +17,13 @@
     "images",
     "slides",
     "slide",
-    "angular",
-    "angular2",
+    "slider",
+    "gallery",
     "ng",
-    "ng2",
-    "typescript"
+    "typescript",
+    "angular4",
+    "angular5",
+    "angular6"
   ],
   "nativescript": {
     "platforms": {
@@ -41,5 +43,12 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  }
+  },
+  "versions": [
+    "0.0.1",
+    "0.0.1",
+    "0.0.1",
+    "0.0.1",
+    "0.0.1"
+  ]
 }

@@ -1,20 +1,33 @@
 # {N} + Angular Carousel Slider
-A simple NativeScript + Angular images carousel for iOS and Android. For {N} version >= 3.0.0.
+A simple NativeScript + Angular images carousel for iOS and Android.
 
-I would appreciate any feedback as well as bug report, suggestions or changes. Thank you in advance.
+Tested on:
+
+* Nativescript versions 3 and 4
+* Angular 4, 5 and 6
+
+I would appreciate any feedback as well as bug reporting, suggestions or changes - please create an issue.
 
 ## Demo
 
+You can check a [reference application here](https://github.com/alcoceba/ngCarouselDirectiveDemo) created to show how to integrate the "{N} + Angular Carousel Slider".
+
 iOs                        |  Android
 :-------------------------:|:-------------------------:
-![](https://github.com/alcoceba/ngCarouselDirective/blob/master/demo/ios.gif?raw=true)|![](https://github.com/alcoceba/ngCarouselDirective/blob/master/demo/android.gif?raw=true)
+![](https://github.com/alcoceba/ngCarouselDirectiveDemo/blob/master/demo/ios.gif?raw=true)|![](https://github.com/alcoceba/ngCarouselDirectiveDemo/blob/master/demo/android.gif?raw=true)
 
 ## Getting started
 
+[See demo](https://github.com/alcoceba/ngCarouselDirectiveDemo) for further details.
 
-See demo for further details.
+1. Download and install the module via npm to your Nativescript project:
 
-1. Add the CarouselDirective class to the declarations NgMoudle metadata:
+<pre>
+cd your_tns_project_path/
+npm install nativescript-ng2-carousel --save
+</pre>
+
+2. Add the CarouselDirective class to the declarations NgMoudle metadata:
 <pre>
 @NgModule({
     declarations: [AppComponent, CarouselDirective],
@@ -24,14 +37,14 @@ See demo for further details.
 })
 </pre>
 
-2. To use the CarouselDirective, create a template that applies the directive as an attribute to a paragraph GridLayout element:
+3. To use the CarouselDirective, create a template that applies the directive as an attribute to a paragraph GridLayout element:
 <pre>
 &lt;GridLayout [carousel]="images" carouselLabelOverlay="true" carouselSpeed="2000"&gt;
     
 &lt;/GridLayout&gt;
 </pre>
 
-Add images from component:
+Add images **from URL** to your component:
 <pre>
 @Component({
     selector: "my-app",
@@ -51,7 +64,7 @@ export class AppComponent {
 }
 </pre>
 
-You can also add images from your assets folder or resources folder using `file` attribute instead of `url` attribute:
+You can also add images from your **assets folder** or **resources folder** using `file` attribute instead of `url` attribute:
 <pre>
 @Component({
     selector: "my-app",
@@ -73,7 +86,7 @@ export class AppComponent {
 </pre>
 
 
-3. CSS styling:
+4. CSS styling:
 
 <pre>
 /** Slider image */
@@ -122,6 +135,12 @@ Currently directive supported attributes:
 
 ## Changelog
 
+**Version 0.0.6**
+
+* Fix bug "Unable to find directive"
+* Demo folder moved https://github.com/alcoceba/ngCarouselDirectiveDemo
+* Improved documentation
+
 **Version 0.0.5**
 
 * Possibility to load images from resources folder in Android and iOS
@@ -134,3 +153,5 @@ Currently directive supported attributes:
 
 * Package.json fixes
 * Minor fixes
+
+You can download older versions [here](https://github.com/alcoceba/ngCarouselDirective/releases).
