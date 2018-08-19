@@ -20,7 +20,6 @@
         }
     },
     "files": [
-        "nativescript-ng2-carousel.directive.ts",
         "nativescript-ng2-carousel.ts"
     ],
     "exclude": [
