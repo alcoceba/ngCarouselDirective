@@ -3,8 +3,11 @@ A simple NativeScript + Angular images carousel for iOS and Android.
 
 Tested on:
 
-* Nativescript 3 and 4
-* Angular 4, 5 and 6
+* Nativescript 4
+* Typescript 3
+* Angular 6
+
+You can download older versions [here](https://github.com/alcoceba/ngCarouselDirective/releases) for previous versions of Angular and Nativescript.
 
 I would appreciate any feedback as well as bug reporting, suggestions or changes - please create an issue.
 
@@ -155,5 +158,3 @@ Currently directive supported attributes:
 
 * Package.json fixes
 * Minor fixes
-
-You can download older versions [here](https://github.com/alcoceba/ngCarouselDirective/releases)

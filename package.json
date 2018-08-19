@@ -37,6 +37,12 @@
       "category": "Interface"
     }
   },
+  "dependencies": {
+    "@angular/core": "^6.0.0",
+    "rxjs": "^6.0.0",
+    "tns-core-modules": "^4.0.0",
+    "zone.js": "^0.8.0"
+  },
   "author": "Manel Alcoceba <manelalcoceba@gmail.com>",
   "bugs": {
     "url": "https://github.com/alcoceba/ngCarouselDirective/issues"
