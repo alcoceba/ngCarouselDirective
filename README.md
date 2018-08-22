@@ -42,7 +42,10 @@ npm install nativescript-ng2-carousel --save
 
 3. To use the CarouselDirective, create a template that applies the directive as an attribute to a paragraph GridLayout element:
 <pre>
-&lt;GridLayout [carousel]="images" carouselLabelOverlay="true" carouselSpeed="2000"&gt;
+&lt;GridLayout [carousel]="images"
+               carouselLabelOverlay="true"
+               carouselSpeed="2000"
+               (selectedImageChange)="select($event)"&gt;
     
 &lt;/GridLayout&gt;
 </pre>
@@ -135,6 +138,7 @@ Currently directive supported attributes:
 * **carouselAnimationSpeed** _(optional)_ defines the animation speed (number in ms)
 * **carouselArrows** _(optional)_ arrow type, accepted values _none_, _small_, _normal_, _bold_ or _narrow_ (default _normal_)
 * **carouselLabelOverlay** _(optional)_ silde title over image, accepted values _true_ or _false_ (default false)
+* **selectedImageChange** _(optional)_ get the title of the selected image (key)
 
 ## Changelog
 
