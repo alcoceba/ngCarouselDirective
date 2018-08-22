@@ -3,14 +3,10 @@ import {AnimationCurve} from "ui/enums";
 import {Image} from "ui/image";
 import {StackLayout} from "ui/layouts/stack-layout";
 import {GridLayout, ItemSpec} from "ui/layouts/grid-layout";
-import {GridUnitType} from "ui/layouts/grid-layout";
-import {HorizontalAlignment} from "ui/enums";
 import {Label} from "ui/label";
 import {GestureTypes} from "ui/gestures";
 import {View} from "ui/core/view";
-import {Visibility} from "ui/enums";
-import {fromFile} from "image-source";
-import {fromResource} from "image-source";
+import {fromFile, fromResource} from "image-source";
 
 @Directive({selector: '[carousel]'})
 export class CarouselDirective implements AfterViewInit {
@@ -39,6 +35,8 @@ export class CarouselDirective implements AfterViewInit {
     @Input() carouselArrows: string; // arrows type
     @Input() carouselLabelOverlay: boolean; // title over image (bool)
     @Input() carouselAnimationSpeed: number; // animation speed
+
+    @Output() selectedImageChange: EventEmitter<string> = new EventEmitter<string>();
 
     constructor(private elem: ElementRef) {
         this.container = elem.nativeElement;
@@ -128,16 +126,25 @@ export class CarouselDirective implements AfterViewInit {
 
             if (slide.url) {
                 let image: Image = CarouselDirective.generateImageSliderFromUrl(slide.url);
+                image.on(GestureTypes.tap, () => {
+                    this.selectedImageChange.emit( slide.title );
+                });
                 gridLayout.addChild(image);
             }
 
             if (slide.file && slide.file.indexOf('res://') !== 0) {
                 let image: Image = CarouselDirective.generateImageSliderFromFile(slide.file);
+                image.on(GestureTypes.tap, () => {
+                    this.selectedImageChange.emit( slide.title );
+                });
                 gridLayout.addChild(image);
             }
 
             if (slide.file && slide.file.indexOf('res://') === 0) {
                 let image: Image = CarouselDirective.generateImageSliderFromResource(slide.file);
+                image.on(GestureTypes.tap, () => {
+                    this.selectedImageChange.emit( slide.title );
+                });
                 gridLayout.addChild(image);
             }
 
