@@ -56,7 +56,6 @@ export class CarouselDirective implements AfterViewInit {
             this.initControls();
         }
         this.initAutoPlay();
-        console.log(`${this.currentElementHiglhtColor}`)
     }
 
     /**
