@@ -1,19 +1,16 @@
-import {Directive, ElementRef, AfterViewInit, Input} from '@angular/core';
-import {AnimationCurve} from "ui/enums";
+import {AfterViewInit, Directive, ElementRef, EventEmitter, Input, Output} from '@angular/core';
 import {Image} from "ui/image";
 import {StackLayout} from "ui/layouts/stack-layout";
 import {GridLayout, ItemSpec} from "ui/layouts/grid-layout";
-import {GridUnitType} from "ui/layouts/grid-layout";
-import {HorizontalAlignment} from "ui/enums";
 import {Label} from "ui/label";
-import {GestureTypes} from "ui/gestures";
+import {GestureTypes, SwipeGestureEventData} from "ui/gestures";
 import {View} from "ui/core/view";
-import {Visibility} from "ui/enums";
-import {fromFile} from "image-source";
-import {fromResource} from "image-source";
+import {fromFile, fromResource} from "image-source";
 
 @Directive({selector: '[carousel]'})
 export class CarouselDirective implements AfterViewInit {
+
+    private static TRANSPARENT: string = "#FFFFFF";
 
     private static animationSpeedDefault: number = 400; // in ms
     private static autoPlaySpeedDefault: number = 0; // in ms
@@ -27,18 +24,23 @@ export class CarouselDirective implements AfterViewInit {
 
     // Private control attributes
     private direction: CarouselDirections = null;
-    private currentImage: number = 0;
     private movingImages: boolean = false;
-    private indexMoveLeft: number = null;
-    private indexMoveRight: number = null;
-    private indexMoveCenter: number = null;
+
+    // My pointers
+    private currentImage: number = 0;
+    private nextImage: number = null;
+    private nextNextImage: number = null;
 
     // Options
     @Input() carousel: any;
     @Input() carouselSpeed: number; // autoplay speed (ms)
     @Input() carouselArrows: string; // arrows type
+    @Input() arrowsEnabled: boolean = false; // enable arrows [default to false]
     @Input() carouselLabelOverlay: boolean; // title over image (bool)
     @Input() carouselAnimationSpeed: number; // animation speed
+    @Input() currentElementHiglhtColor: string;
+
+    @Output() selectedImageChange: EventEmitter<string> = new EventEmitter<string>();
 
     constructor(private elem: ElementRef) {
         this.container = elem.nativeElement;
@@ -49,7 +51,10 @@ export class CarouselDirective implements AfterViewInit {
         this.initContainer();
         this.initImagesLayout();
         this.initSlides();
-        this.initControls();
+        // Prefer swipe over arrows tap
+        if (this.arrowsEnabled === true) {
+            this.initControls();
+        }
         this.initAutoPlay();
     }
 
@@ -100,10 +105,8 @@ export class CarouselDirective implements AfterViewInit {
      * Init carousel layout
      */
     private initContainer() {
-        this.container.horizontalAlignment = "center";
+        this.container.horizontalAlignment = "left";
         this.container.addRow(new ItemSpec(1, "auto"));
-        this.container.addColumn(new ItemSpec(1, "star"));
-        this.container.addColumn(new ItemSpec(1, "star"));
     }
 
     /**
@@ -112,9 +115,29 @@ export class CarouselDirective implements AfterViewInit {
     private initImagesLayout() {
         this.totalItems = this.carousel.length;
         this.carouselSlides = new GridLayout();
-        GridLayout.setColumnSpan(this.carouselSlides, 2);
+        GridLayout.setColumnSpan(this.carouselSlides, 3);
+        this.carouselSlides.addColumn(new ItemSpec(1, 'auto'));
+        this.carouselSlides.addColumn(new ItemSpec(1, 'auto'));
+        this.carouselSlides.addColumn(new ItemSpec(1, 'auto'));
         this.container.addChild(this.carouselSlides);
     }
+
+    private initVisibility(index: number) {
+        return index === 0 || index === 1 || index === 2 ? "visible" : "collapse";
+    }
+
+    private getInitColPos(index: number) {
+        switch (index) {
+            case 0:
+                return 0;
+            case 1:
+                return 1;
+            case 2:
+                return 2; // could be any value between 0-2 since would be collapse
+
+        }
+    }
+
 
     /**
      * Init carousel sliders provided in "carousel" directive attribute
@@ -124,22 +147,58 @@ export class CarouselDirective implements AfterViewInit {
 
             let gridLayout = new GridLayout();
             gridLayout.addRow(new ItemSpec(1, "auto"));
-            gridLayout.visibility = i == 0 ? "visible" : "collapse";
+            gridLayout.visibility = this.initVisibility(i);
 
+            if (i === 0 ) {
+                gridLayout.backgroundColor = this.currentElementHiglhtColor;
+            }
+
+            let image: Image;
             if (slide.url) {
-                let image: Image = CarouselDirective.generateImageSliderFromUrl(slide.url);
+                image = CarouselDirective.generateImageSliderFromUrl(slide.url);
+                image.on(GestureTypes.tap, () => {
+                    this.selectedImageChange.emit( slide.title );
+                });
+                image.on(GestureTypes.swipe, (args: SwipeGestureEventData) => {
+                    if (args.direction === 1) {
+                        this.swipe(CarouselDirections.DIRECTION_LEFT);
+                    } else if (args.direction === 2) {
+                        this.swipe(CarouselDirections.DIRECTION_RIGHT);
+                    }
+                });
                 gridLayout.addChild(image);
             }
 
             if (slide.file && slide.file.indexOf('res://') !== 0) {
-                let image: Image = CarouselDirective.generateImageSliderFromFile(slide.file);
+                image = CarouselDirective.generateImageSliderFromFile(slide.file);
+                image.on(GestureTypes.tap, () => {
+                    this.selectedImageChange.emit( slide.title );
+                });
+                image.on(GestureTypes.swipe, (args: SwipeGestureEventData) => {
+                    if (args.direction === 1) {
+                        this.swipe(CarouselDirections.DIRECTION_LEFT);
+                    } else if (args.direction === 2) {
+                        this.swipe(CarouselDirections.DIRECTION_RIGHT);
+                    }
+                });
                 gridLayout.addChild(image);
             }
 
             if (slide.file && slide.file.indexOf('res://') === 0) {
-                let image: Image = CarouselDirective.generateImageSliderFromResource(slide.file);
+                image = CarouselDirective.generateImageSliderFromResource(slide.file);
+                image.on(GestureTypes.tap, () => {
+                    this.selectedImageChange.emit( slide.title );
+                });
+                image.on(GestureTypes.swipe, (args: SwipeGestureEventData) => {
+                    if (args.direction === 1) {
+                        this.swipe(CarouselDirections.DIRECTION_LEFT);
+                    } else if (args.direction === 2) {
+                        this.swipe(CarouselDirections.DIRECTION_RIGHT);
+                    }
+                });
                 gridLayout.addChild(image);
             }
+
 
             if (slide.title) {
                 let title: Label = CarouselDirective.generateTitleSlider(slide.title);
@@ -149,7 +208,11 @@ export class CarouselDirective implements AfterViewInit {
                 }
                 gridLayout.addChild(title);
             }
+
             this.carouselSlides.addChild(gridLayout);
+            if (gridLayout.visibility === 'visible') {
+                GridLayout.setColumn(gridLayout, this.getInitColPos(i));
+            }
         });
     }
 
@@ -252,6 +315,7 @@ export class CarouselDirective implements AfterViewInit {
     private initAutoPlay() {
         if (this.carouselSpeed && CarouselDirective.isNumeric(this.carouselSpeed)) {
             clearInterval(this.autoPlayIntervalId);
+            // @ts-ignore
             this.autoPlayIntervalId = setInterval(() => {
                 this.swipe(CarouselDirections.DIRECTION_RIGHT);
             }, this.carouselSpeed + this.carouselAnimationSpeed);
@@ -265,6 +329,7 @@ export class CarouselDirective implements AfterViewInit {
         if (this.autoPlayIntervalId) {
             clearTimeout(this.autoPlayTimeoutId);
             clearInterval(this.autoPlayIntervalId);
+            // @ts-ignore
             this.autoPlayTimeoutId = setTimeout(() => {
                 this.swipe(CarouselDirections.DIRECTION_RIGHT);
                 this.initAutoPlay();
@@ -305,81 +370,29 @@ export class CarouselDirective implements AfterViewInit {
 
             // Get element width + image visibility
             let elementWidth = this.elem.nativeElement.getActualSize().width;
-            view.visibility = [this.indexMoveCenter, this.indexMoveLeft, this.indexMoveRight].indexOf(i) > -1 ? "visible" : "collapse";
+            view.visibility = [this.currentImage, this.nextImage, this.nextNextImage].indexOf(i) > -1 ? "visible" : "collapse";
 
-            // Perfrom animation
-            this.checkCL(view, i, elementWidth);
-            this.checkCR(view, i, elementWidth);
-            this.checkRC(view, i, elementWidth);
-            this.checkLC(view, i, elementWidth);
+            // Perfrom translation
+            if (view.visibility === 'visible'){
+                this.applySwipe(view, i, elementWidth);
+            }
         }
     }
 
-    /**
-     * Move image center -> left
-     * @param view
-     * @param index
-     * @param elementWidth
-     */
-    private checkCL(view: View, index: number, elementWidth: number) {
-        if (this.indexMoveLeft == index) {
-            view.translateX = 0;
-            view.animate({
-                translate: {x: elementWidth, y: 0},
-                duration: this.carouselAnimationSpeed,
-                curve: AnimationCurve.easeIn
-            });
-        }
-    }
-
-    /**
-     * Move image right -> center
-     * @param view
-     * @param index
-     * @param elementWidth
-     */
-    private checkRC(view: View, index: number, elementWidth: number) {
-        if (this.indexMoveCenter == index && this.direction == CarouselDirections.DIRECTION_LEFT) {
-            view.translateX = -elementWidth;
-            view.animate({
-                translate: {x: 0, y: 0},
-                duration: this.carouselAnimationSpeed,
-                curve: AnimationCurve.easeOut
-            });
-        }
-    }
-
-    /**
-     * Move image center -> right
-     * @param view
-     * @param index
-     * @param elementWidth
-     */
-    private checkCR(view: View, index: number, elementWidth: number) {
-        if (this.indexMoveRight == index) {
-            view.translateX = 0;
-            view.animate({
-                translate: {x: -elementWidth, y: 0},
-                duration: this.carouselAnimationSpeed,
-                curve: AnimationCurve.easeIn
-            });
-        }
-    }
-
-    /**
-     * Move image left -> center
-     * @param view
-     * @param index
-     * @param elementWidth
-     */
-    private checkLC(view: View, index: number, elementWidth: number) {
-        if (this.indexMoveCenter == index && this.direction == CarouselDirections.DIRECTION_RIGHT) {
-            view.translateX = elementWidth;
-            view.animate({
-                translate: {x: 0, y: 0},
-                duration: this.carouselAnimationSpeed,
-                curve: AnimationCurve.easeOut
-            });
+    private applySwipe (view: View, index: number, elementWidth: number) {
+        switch (index) {
+            case this.currentImage:
+                view.backgroundColor = this.currentElementHiglhtColor;
+                GridLayout.setColumn(view, 0);
+                break;
+            case this.nextImage:
+                view.backgroundColor = CarouselDirective.TRANSPARENT;
+                GridLayout.setColumn(view, 1);
+                break;
+            case this.nextNextImage:
+                view.backgroundColor = CarouselDirective.TRANSPARENT;
+                GridLayout.setColumn(view, 2);
+                break;
         }
     }
 
@@ -391,16 +404,16 @@ export class CarouselDirective implements AfterViewInit {
 
             // right to left
             case CarouselDirections.DIRECTION_LEFT:
-                this.indexMoveLeft = this.currentImage;
-                this.currentImage = ((this.currentImage == 0 ? this.totalItems : this.currentImage) - 1) % this.totalItems;
-                this.indexMoveCenter = this.currentImage;
+                this.currentImage = ((this.currentImage === 0 ? this.totalItems : this.currentImage) - 1) % this.totalItems;
+                this.nextImage = ((this.currentImage === 0 ? this.totalItems : this.currentImage) - 1) % this.totalItems;
+                this.nextNextImage = ((this.nextImage === 0 ? this.totalItems : this.nextImage) - 1) % this.totalItems;
                 break;
 
             // left to right
             case CarouselDirections.DIRECTION_RIGHT:
-                this.indexMoveRight = this.currentImage;
-                this.currentImage = (this.currentImage + 1) % this.totalItems;
-                this.indexMoveCenter = this.currentImage;
+                this.currentImage = ((this.currentImage === 0 ? this.totalItems : this.currentImage) + 1) % this.totalItems;
+                this.nextImage = (this.currentImage + 1) % this.totalItems;
+                this.nextNextImage = (this.nextImage + 1) % this.totalItems;
                 break;
         }
     }
@@ -409,9 +422,8 @@ export class CarouselDirective implements AfterViewInit {
      * Reset values after animation
      */
     private resetAnimationValues() {
-        this.indexMoveLeft = null;
-        this.indexMoveRight = null;
-        this.indexMoveCenter = null;
+        this.nextImage = null;
+        this.nextNextImage = null;
         this.movingImages = false;
     }
 

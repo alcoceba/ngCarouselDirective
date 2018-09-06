@@ -20,7 +20,7 @@
         }
     },
     "files": [
-        "nativescript-ng2-carousel.ts"
+        "nativescript-ng2-carousel-swipeable.ts"
     ],
     "exclude": [
         "node_modules",

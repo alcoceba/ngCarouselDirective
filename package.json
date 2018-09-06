@@ -1,15 +1,15 @@
 {
-  "name": "nativescript-ng2-carousel",
-  "version": "0.1.0",
+  "name": "nativescript-ng2-carousel-swipeable",
+  "version": "0.1.2",
   "description": "A simple NativeScript + Angular images carousel for iOS and Android",
   "license": "MIT",
-  "main": "nativescript-ng2-carousel",
-  "homepage": "https://github.com/alcoceba/ngCarouselDirective#readme",
+  "main": "nativescript-ng2-carousel-swipeable",
+  "homepage": "https://github.com/fdiazaguirre/ngCarouselDirective#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alcoceba/ngCarouselDirective.git"
+    "url": "git+https://github.com/fdiazaguirre/ngCarouselDirective.git"
   },
-  "typings": "nativescript-ng2-carousel.ts",
+  "typings": "nativescript-ng2-carousel-swipeable.ts",
   "keywords": [
     "angular",
     "nativescript",
@@ -44,8 +44,9 @@
     "zone.js": "^0.8.0"
   },
   "author": "Manel Alcoceba <manelalcoceba@gmail.com>",
+  "contributors": ["Federico Diaz <fdiazaguirre@gmail.com>"],
   "bugs": {
-    "url": "https://github.com/alcoceba/ngCarouselDirective/issues"
+    "url": "https://github.com/fdiazaguirre/ngCarouselDirective/issues"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
