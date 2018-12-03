@@ -21,8 +21,8 @@ export class CarouselDirective implements AfterViewInit {
     private container: GridLayout;
     private carouselSlides: GridLayout;
     private totalItems: number = 0;
-    private autoPlayIntervalId: number;
-    private autoPlayTimeoutId: number;
+    private autoPlayIntervalId: any;
+    private autoPlayTimeoutId: any;
     private arrowType: number = CarouselArrowTypes.NORMAL;
 
     // Private control attributes
