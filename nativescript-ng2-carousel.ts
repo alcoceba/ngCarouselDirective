@@ -1,18 +1,25 @@
-import {Directive, ElementRef, AfterViewInit, Input} from '@angular/core';
-import {AnimationCurve} from "ui/enums";
-import {Image} from "ui/image";
-import {StackLayout} from "ui/layouts/stack-layout";
-import {GridLayout, ItemSpec} from "ui/layouts/grid-layout";
-import {GridUnitType} from "ui/layouts/grid-layout";
-import {HorizontalAlignment} from "ui/enums";
-import {Label} from "ui/label";
-import {GestureTypes} from "ui/gestures";
-import {View} from "ui/core/view";
-import {Visibility} from "ui/enums";
-import {fromFile} from "image-source";
-import {fromResource} from "image-source";
 
-@Directive({selector: '[carousel]'})
+import {Directive, ElementRef, AfterViewInit, Input} from '@angular/core';
+import {AnimationCurve} from "tns-core-modules/ui/enums";
+import {Image} from "tns-core-modules/ui/image";
+import {StackLayout} from "tns-core-modules/ui/layouts/stack-layout";
+import {GridLayout, ItemSpec} from "tns-core-modules/ui/layouts/grid-layout";
+import {GridUnitType} from "tns-core-modules/ui/layouts/grid-layout";
+import {HorizontalAlignment} from "tns-core-modules/ui/enums";
+import {Label} from "tns-core-modules/ui/label";
+import {GestureTypes} from "tns-core-modules/ui/gestures";
+import {View} from "tns-core-modules/ui/core/view";
+import {Visibility} from "tns-core-modules/ui/enums";
+import {fromFile} from "tns-core-modules/image-source";
+import {fromResource} from "tns-core-modules/image-source";
+
+@Directive({
+  selector: '[carousel]'
+})
+
+
+
+
 export class CarouselDirective implements AfterViewInit {
 
     private static animationSpeedDefault: number = 400; // in ms
